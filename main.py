@@ -14,7 +14,7 @@ def menu():
     print("4.Register Book")
     print("5.Issue Book")
     print("6.Exit")
-menu()
+
 
 def addbook():
     print(Fore.GREEN + "---Add Book---")
@@ -23,12 +23,38 @@ def addbook():
         if book_id.isdigit():
             break
         else:
-            print(Fore.RED + "Invalid Book Id \n Enter only numbers")
+            print(Fore.RED + "Invalid Book Id \nEnter only numbers")
+    book_name = input("Enter Book name  :")
+    book_author = input("Enter the author name  :")
+
+    book_quantity = input("Enter Quantity  :").strip()
+    while True:
+        if book_quantity.isdigit():
+            if int(book_quantity) > 0:
+                print("Ok")
+                break
+            else:
+                print(Fore.RED + "Quantity can not be '0'")
+        else:
+            print(Fore.RED + "INVALID QUANTITY \nEnter a valid number")
+    print(Fore.GREEN + f"---{"Book added Sucessfully"}---")
+
+    with open("book_data.txt","a") as file:
+        file.write(f"{book_name} , {book_name} , {book_author} , {book_quantity}\n")
+
+
+
+
+
+
+
+
 
 
 
 
 while True:
+    menu()
     choice = input("Enter your Choice(1 to 6) : ")
     if choice == "1":
         addbook()
