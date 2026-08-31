@@ -8,22 +8,39 @@ def menu():
 ║        📚  LIBRARY MANAGEMENT SYSTEM  📚     ║
 ║                                              ║
 ╚══════════════════════════════════════════════╝''')
-    print("1.  ")
-    print("2.  ")
-    print("3.  ")
-    print("4.  ")
-    print("5.  ")
+    print("1.Add Book")
+    print("2.View Book")
+    print("3.Search Book")
+    print("4.Register Book")
+    print("5.Issue Book")
+    print("6.Exit")
 menu()
-choice = input("Enter your choice here : ")
-if choice == "1":
-    print("1")
-elif choice == "2":
-    print("2")
-elif choice == "3":
-    print("3")
-elif choice == "4":
-    print("4")
-elif choice == "5":
-    print("5")
-else:
-    print("6")
+
+def addbook():
+    print(Fore.GREEN + "---Add Book---")
+    while True:
+        book_id = input("Enter Book Id  :").strip()
+        if book_id.isdigit():
+            break
+        else:
+            print(Fore.RED + "Invalid Book Id \n Enter only numbers")
+
+
+
+
+while True:
+    choice = input("Enter your Choice(1 to 6) : ")
+    if choice == "1":
+        addbook()
+    elif choice == "2":
+        print("View book")
+    elif choice == "3":
+        print("Search Book")
+    elif choice == "4":
+        print("Register Book")
+    elif choice == "5":
+        print("Issue Book")
+    elif choice == "6":
+        break
+    else:
+        print("!!Invalid Choice!!")
