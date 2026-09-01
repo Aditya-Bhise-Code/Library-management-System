@@ -5,7 +5,7 @@ def menu():
     init(autoreset=True)
     print(Fore.CYAN + '''╔══════════════════════════════════════════════╗
 ║                                              ║
-║        📚  LIBRARY MANAGEMENT SYSTEM  📚     ║
+║       📚  LIBRARY MANAGEMENT SYSTEM  📚      ║
 ║                                              ║
 ╚══════════════════════════════════════════════╝''')
     print("1.Add Book")
@@ -24,14 +24,12 @@ def addbook():
             break
         else:
             print(Fore.RED + "Invalid Book Id \nEnter only numbers")
-    book_name = input("Enter Book name  :")
-    book_author = input("Enter the author name  :")
-
+    book_name = input("Enter Book name  :").strip()
+    book_author = input("Enter the author name  :").strip()
     book_quantity = input("Enter Quantity  :").strip()
     while True:
         if book_quantity.isdigit():
             if int(book_quantity) > 0:
-                print("Ok")
                 break
             else:
                 print(Fore.RED + "Quantity can not be '0'")
@@ -39,10 +37,10 @@ def addbook():
             print(Fore.RED + "INVALID QUANTITY \nEnter a valid number")
     print(Fore.GREEN + f"---{"Book added Sucessfully"}---")
 
-    with open("book_data.txt","a") as file:
-        file.write(f"{book_name} , {book_name} , {book_author} , {book_quantity}\n")
+    with open("book_data.txt","r+") as file:
+        file.write(f"{book_id} , {book_name} , {book_author} , {book_quantity}\n")
 
-
+    
 
 
 
