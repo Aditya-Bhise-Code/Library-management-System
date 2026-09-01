@@ -16,15 +16,25 @@ def menu():
     print("6.Exit")
 
 
+def read_book():
+    with open("book_data.txt","r") as f:
+        book_data = f.readlines()
+    return book_data
+
+
 def addbook():
+    #Dockstring
+    """This is book function that contain Bookname , bookid , bookauthor , bookquantity"""
+    book_data = read_book()
     print(Fore.GREEN + "---Add Book---")
-    while True:
-        book_id = input("Enter Book Id  :").strip()
-        if book_id.isdigit():
-            break
-        else:
-            print(Fore.RED + "Invalid Book Id \nEnter only numbers")
+    book_id = len(book_data) + 1
+    print(f"Book Id  : {book_id}")
     book_name = input("Enter Book name  :").strip()
+    for i in book_data:
+        if book_name in i:
+            print(Fore.GREEN + "This book already exists")
+            print(Fore.RED + "Terminating this Function")
+            return False
     book_author = input("Enter the author name  :").strip()
     book_quantity = input("Enter Quantity  :").strip()
     while True:
@@ -37,8 +47,8 @@ def addbook():
             print(Fore.RED + "INVALID QUANTITY \nEnter a valid number")
     print(Fore.GREEN + f"---{"Book added Sucessfully"}---")
 
-    with open("book_data.txt","r+") as file:
-        file.write(f"{book_id} , {book_name} , {book_author} , {book_quantity}\n")
+    with open("book_data.txt","a") as file:
+        file.write(f" {book_id} , {book_name} , {book_author} , {book_quantity}\n")
 
     
 
