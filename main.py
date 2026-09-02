@@ -9,11 +9,17 @@ def menu():
 ║                                              ║
 ╚══════════════════════════════════════════════╝''')
     print("1.Add Book")
+    print()
     print("2.View Book")
+    print()
     print("3.Search Book")
+    print()
     print("4.Register Book")
+    print()
     print("5.Issue Book")
+    print()
     print("6.Exit")
+    print()
 
 
 def read_book():
@@ -29,13 +35,13 @@ def addbook():
     print(Fore.GREEN + "---Add Book---")
     book_id = len(book_data) + 1
     print(f"Book Id  : {book_id}")
-    book_name = input("Enter Book name  :").strip()
+    book_name = input("Enter Book name  :").strip().title()
     for i in book_data:
         if book_name in i:
             print(Fore.GREEN + "This book already exists")
             print(Fore.RED + "Terminating this Function")
             return False
-    book_author = input("Enter the author name  :").strip()
+    book_author = input("Enter the author name  :").strip().title()
     book_quantity = input("Enter Quantity  :").strip()
     while True:
         if book_quantity.isdigit():
@@ -50,9 +56,29 @@ def addbook():
     with open("book_data.txt","a") as file:
         file.write(f" {book_id} , {book_name} , {book_author} , {book_quantity}\n")
 
-    
+def view_book():
+    book_data = read_book()
+    print("Sr.no , Book_Name , Book_Author , Book_Quantity")
+    for i in book_data:
+        print(Fore.GREEN + i)
+        print()
 
 
+
+
+
+
+
+def search_book():     #Doubt
+    print(Fore.GREEN + "---Search Book---")
+    book_name = input("Enter book name  :").title()
+    book_data = read_book()
+    for i in book_data:
+        if book_name in i:
+            print(Fore.GREEN + "Yes we have that book")
+            break
+        else:
+            print(Fore.LIGHTRED_EX + "Sorry we don't have the book")
 
 
 
@@ -67,7 +93,7 @@ while True:
     if choice == "1":
         addbook()
     elif choice == "2":
-        print("View book")
+        view_book()
     elif choice == "3":
         print("Search Book")
     elif choice == "4":
@@ -77,4 +103,4 @@ while True:
     elif choice == "6":
         break
     else:
-        print("!!Invalid Choice!!")
+        print(Fore.RED + "                !!Invalid Choice!!")
