@@ -52,12 +52,14 @@ def addbook():
                 break
             else:
                 print(Fore.RED + "Quantity can not be '0'")
+                return False
         else:
             print(Fore.RED + "INVALID QUANTITY \nEnter a valid number")
+            return False
     print(Fore.GREEN + f"---{"Book added Sucessfully"}---")
 
     with open("book_data.txt","a") as file:
-        file.write(f" {book_id} , {book_name} , {book_author} , {book_quantity}\n")
+        file.write(f"{book_id}, {book_name}, {book_author}, {book_quantity} \n")
 
 def view_book():
     book_data = read_book()
@@ -68,25 +70,46 @@ def view_book():
         for i in book_data:
             i = i.replace("\n","")
             i = i.split(",")
-            print(Fore.LIGHTYELLOW_EX + f"{i[0]} - {i[1]} - {i[-1]}")
+            print(Fore.LIGHTYELLOW_EX + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
+
+# def search_book(param):
+#     print(Fore.GREEN + "---Search Book---")
+#     book_data = read_book()
+#     if len(book_data) == 0:
+#             print(Fore.RED + "There are no book in Database to Search")
+#     else:
+#         for i in book_data:
+#             i = i.replace("\n","")
+#             i = i.split(",")
+#             if param.isdigit():
+#                 if i[0] == " " + param + " ":
+#                     print("\n\n")
+#                     print(Fore.LIGHTYELLOW_EX + f"{i[0]} - {i[1]} - {i[-1]}")
+#                     return i
+#             else:
+#                 print("ok")
 
 def search_book(param):
-    print(Fore.GREEN + "---Search Book---")
-    book_data = read_book()
+    book_data = read_book() 
     if len(book_data) == 0:
-            print(Fore.RED + "There are no book in Database to Search")
+       print(Fore.RED + "There is no Book in DataBase to Search")
     else:
-        for i in book_data:
-            i = i.replace("\n","")
-            i = i.split(",")
+       for i in book_data:
+            i = i.replace("\n", "")
+            i = i.split()
             if param.isdigit():
-                if i[0] == param + " ":
-                    print("\n\n")
-                    print(Fore.LIGHTYELLOW_EX + f"{i[0]} - {i[1]} - {i[-1]}")
+                # print(f"{i[0]} --> {type(i[0])}")
+                # print(param, type(param))
+                if i[0] == param + ",":
+                    print()
+                    print(Fore.CYAN + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
+                    print()
+                    return i
             else:
-                print("ok")
-
-
+                if i[1].lower() == param.lower() + ",":
+                    print("\n\n")
+                    print(Fore.CYAN + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
+                    return i
 
 
 
