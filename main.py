@@ -9,17 +9,17 @@ def menu():
 ║                                              ║
 ╚══════════════════════════════════════════════╝''')
     print("1.Add Book")
-    print()
+    print("════"*12)
     print("2.View Book")
-    print()
-    print("3.Search Book")
-    print()
-    print("4.Register Book")
-    print()
-    print("5.Issue Book")
-    print()
-    print("6.Exit")
-    print()
+    print("════"*12)
+    # print("3.Search Book")
+    # print("════"*12)
+    print("3.Register Book")
+    print("════"*12)
+    print("4.Issue Book")
+    print("════"*12)
+    print("5.Exit")
+    print(Fore.CYAN + "════"*12)
 
 book_data = [] #initialization
 def read_book():
@@ -56,80 +56,66 @@ def addbook():
         else:
             print(Fore.RED + "INVALID QUANTITY \nEnter a valid number")
             return False
-    print(Fore.GREEN + f"---{"Book added Sucessfully"}---")
+    print(Fore.GREEN + Style.BRIGHT + f"---{"Book added Sucessfully"}---")
 
     with open("book_data.txt","a") as file:
         file.write(f"{book_id}, {book_name}, {book_author}, {book_quantity} \n")
 
 def view_book():
     book_data = read_book()
-    print("Sr.no , Book_Name , Book_Author , Book_Quantity")
+    print(Fore.LIGHTYELLOW_EX + "Book-id , Book-Name , Book-Author , Book-Quantity")
     if len(book_data) == 0:
         print(Fore.RED + "There are no book in Database to view")
     else:
         for i in book_data:
             i = i.replace("\n","")
             i = i.split(",")
-            print(Fore.LIGHTYELLOW_EX + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
+            print(Fore.GREEN + f"{i[0]} - {i[1]} - {i[2]} - {i[-1]}")
+
 
 # def search_book(param):
-#     print(Fore.GREEN + "---Search Book---")
-#     book_data = read_book()
+#     book_data = read_book() 
 #     if len(book_data) == 0:
-#             print(Fore.RED + "There are no book in Database to Search")
+#        print(Fore.RED + "There is no Book in DataBase to Search")
 #     else:
-#         for i in book_data:
-#             i = i.replace("\n","")
-#             i = i.split(",")
+#        for i in book_data:
+#             i = i.replace("\n", "")
+#             i = i.split()
 #             if param.isdigit():
-#                 if i[0] == " " + param + " ":
-#                     print("\n\n")
-#                     print(Fore.LIGHTYELLOW_EX + f"{i[0]} - {i[1]} - {i[-1]}")
+#                 if i[0] == (param + ","):
+#                     print()
+#                     print(Fore.CYAN + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
+#                     print()
 #                     return i
-#             else:
-#                 print("ok")
+#             elif i[1].title() == param.title() + ",":
+#                     print("\n\n")
+#                     print(Fore.CYAN + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
+#                     return i
 
-def search_book(param):
-    book_data = read_book() 
-    if len(book_data) == 0:
-       print(Fore.RED + "There is no Book in DataBase to Search")
-    else:
-       for i in book_data:
-            i = i.replace("\n", "")
-            i = i.split()
-            if param.isdigit():
-                # print(f"{i[0]} --> {type(i[0])}")
-                # print(param, type(param))
-                if i[0] == param + ",":
-                    print()
-                    print(Fore.CYAN + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
-                    print()
-                    return i
-            else:
-                if i[1].lower() == param.lower() + ",":
-                    print("\n\n")
-                    print(Fore.CYAN + f"Book Id : {i[0]} Book Name : {i[1]}  Book Author : {i[2]} Book_Quantity : {i[-1]} ")
-                    return i
-
-
-
-
+def register_book():
+    user_id = input("Enter your user id  :")
+    book_name = input("Enter book name  :")
+    print(Fore.GREEN + Style.BRIGHT + f"---{"Book Registered Sucessfully"}---")
+    with open("registered_books.txt","a") as file:
+        file.write(f"User Id --->{user_id} registerd Book --->{book_name}\n")
+    
 
 while True:
     menu()
-    choice = input("Enter your Choice(1 to 6) : ")
+    choice = input("Enter your Choice(1 to 5) : ")
+    print(Fore.CYAN + "════"*12)
     if choice == "1":
         addbook()
     elif choice == "2":
         view_book()
+    # elif choice == "3":
+    #     val = input("Enter the book Id  :")
+    #     search_book(val)
     elif choice == "3":
-        val = input("Enter the book Id  :")
-        search_book(val)
+        register_book()
     elif choice == "4":
-        print("Register Book")
-    elif choice == "5":
         print("Issue Book")
-    elif choice == "6":
+    elif choice == "5":
         break
     else:
-        print(Fore.RED + "                !!Invalid Choice!!")
+        print(Fore.RED + Style.BRIGHT + "                !!Invalid Choice!!")
