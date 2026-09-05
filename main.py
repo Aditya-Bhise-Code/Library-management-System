@@ -10,13 +10,13 @@ def menu():
 ╚══════════════════════════════════════════════╝''')
     print("1.Add Book")
     print("════"*12)
-    print("2.View Book")
+    print("2.View Added Books")
     print("════"*12)
     # print("3.Search Book")
     # print("════"*12)
     print("3.Register Book")
     print("════"*12)
-    print("4.Issue Book")
+    print("4.View Registerd Books")
     print("════"*12)
     print("5.Exit")
     print(Fore.CYAN + "════"*12)
@@ -72,7 +72,7 @@ def view_book():
             i = i.split(",")
             print(Fore.GREEN + f"{i[0]} - {i[1]} - {i[2]} - {i[-1]}")
 
-
+#The search book function has some bugs
 # def search_book(param):
 #     book_data = read_book() 
 #     if len(book_data) == 0:
@@ -97,8 +97,29 @@ def register_book():
     book_name = input("Enter book name  :")
     print(Fore.GREEN + Style.BRIGHT + f"---{"Book Registered Sucessfully"}---")
     with open("registered_books.txt","a") as file:
-        file.write(f"User Id --->{user_id} registerd Book --->{book_name}\n")
+        file.write(f"User Id --->{user_id} ,registerd Book --->{book_name}\n")
     
+book_data_1 = [] #initialization
+def view_registerd_books():
+    try:
+        with open("registered_books.txt","r") as file:
+            book_data_1 = file.readlines()
+            return book_data_1
+    except FileNotFoundError:
+        print("No Books are Registered till now")
+        return book_data_1
+
+
+def list_reg_books():
+    book_data_1 = view_registerd_books()
+    if len(book_data_1) == 0:
+        print("No Registerd Books")
+    else:
+        for i in book_data_1:
+            i = i.replace("\n","")
+            i = i.split(",")
+            print(Fore.GREEN + f"{i[0]} {i[-1]}")
+
 
 while True:
     menu()
@@ -114,7 +135,7 @@ while True:
     elif choice == "3":
         register_book()
     elif choice == "4":
-        print("Issue Book")
+        list_reg_books()
     elif choice == "5":
         break
     else:
